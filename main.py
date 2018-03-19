@@ -34,12 +34,81 @@ pwm.set_pwm_freq(50)
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 while True:
     # Move servo on channel O between extremes.
-    pwm.set_pwm(0, 0, servo_min)
-    print("min")
-    time.sleep(1)
-    pwm.set_pwm(1, 0, servo_min)
-    time.sleep(1)
-    pwm.set_pwm(1, 0, servo_max)
-    time.sleep(1)
-    pwm.set_pwm(0, 0, servo_max)
-    time.sleep(1)
+#    pwm.set_pwm(0, 0, servo_min)
+#    print("min")
+#    time.sleep(1)
+#    pwm.set_pwm(1, 0, servo_min)
+#    time.sleep(1)
+#    pwm.set_pwm(1, 0, servo_max)
+#    time.sleep(1)
+#    pwm.set_pwm(0, 0, servo_max)
+#    time.sleep(1)
+#    distance = readPing();
+#    Serial.println(distance);
+    if ( Serial.available()) 
+    {
+       char ch = Serial.read();
+       if (ch == 'f')
+       {
+         forward ();
+         Serial.println(distance);
+      }
+
+      if (ch == 'b')
+      {
+        back ();
+        Serial.println(distance);
+      }
+
+      if (ch == 'r')
+      {
+        right ();
+        Serial.println(distance);
+      }
+
+      if (ch == 'l')
+      {
+        left ();
+        Serial.println(distance);
+      }
+
+      if (ch == 'w')
+      {
+        wave ();
+        stand ();
+        wave2 ();
+        stand ();
+        Serial.println(distance);
+      }
+
+      if (ch == 's')
+      {
+        sleep ();
+        Serial.println(distance);
+      }
+
+      if (ch == 'u')
+      {
+        stand ();
+        Serial.println(distance);
+      }
+
+      // Pressing a once causes the robot to begin moving autonomously, and pressing it again causes the robot to stop
+      if (ch == 'a')
+      {
+          if (!autoMove)
+          {
+            waveCount2 = 0;
+            autoMove = true;
+          }
+          else 
+          {
+            autoMove = false;
+          }
+       }
+   }
+          if (autoMove)
+          {
+              autonomy ();
+              Serial.println(distance);
+          }
