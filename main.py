@@ -6,12 +6,13 @@ import pca9685
 import motion
 
 logging.basicConfig(level=logging.DEBUG)
+mo = motion.Motion()
+autoMove = 1
 
 # Initialise the PCA9685 using the default address (0x40).
-pwm = pca9685.PCA9685()
-
 # Alternatively specify a different address and/or bus:
 # pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
+pwm = pca9685.PCA9685()
 
 servo_min = 150  # Min pulse length out of 4096
 servo_max = 600  # Max pulse length out of 4096
@@ -47,50 +48,32 @@ while True:
     #    distance = readPing();
     #    Serial.println(distance);
     if 1:
-        ch="f"
+        ch = "f"
         if ch == 'f':
-            forward ()
-            Serial.println(distance)
-
+            mo.forward()
         if ch == 'b':
-            back ()
-            Serial.println(distance)
-
+            mo.back()
         if ch == 'r':
-            right ()
-            Serial.println(distance)
-
+            mo.right()
         if ch == 'l':
-            left ()
-            Serial.println(distance)
-
+            mo.left()
         if ch == 'w':
-            wave ()
-            stand ()
-            wave2 ()
-            stand ()
-            Serial.println(distance)
-
+            mo.wave()
+            mo.stand()
+            mo.wave2()
+            mo.stand()
         if ch == 's':
-            sleep ()
-            Serial.println(distance)
-
-
+            mo.sleep()
         if ch == 'u':
-            stand ()
-            Serial.println(distance)
+            mo.stand()
 
-
-      # Pressing a once causes the robot to begin moving autonomously, and pressing it again causes the robot to stop
+        # Pressing a once causes the robot to begin moving autonomously, and pressing it again causes the robot to stop
         if ch == 'a':
-            if !autoMove:
+            if ~autoMove:
                 waveCount2 = 0
-                autoMove = true
-            else:
-                autoMove = false;
-
+                autoMove = 1
+        else:
+            autoMove = 0
 
     if autoMove:
-        autonomy()
-        Serial.println(distance)
-
+        mo.autonomy()
