@@ -30,9 +30,21 @@ class Servo:
         self.channel = channel
 
     def set_servo_angle(self, channel, angle):
-            pulse = angle*5
-            3
+        pulse = angle * 5
+        pulse //= 2 + 150
         self.pwm.set_pwm(channel, 0, pulse)
+
+    def move_extreme(self):
+        # Move servo on channel O between extremes.
+        self.pwm.set_pwm(0, 0, self.servo_min)
+        print("min")
+        time.sleep(1)
+        self.pwm.set_pwm(1, 0, self.servo_min)
+        time.sleep(1)
+        self.pwm.set_pwm(1, 0, self.servo_max)
+        time.sleep(1)
+        self.pwm.set_pwm(0, 0, self.servo_max)
+        time.sleep(1)
 
     # Helper function to make setting a servo pulse width simpler.
     def set_servo_pulse(self, channel, pulse):
@@ -113,18 +125,6 @@ if __name__ == '__main__':
 
     print('Moving servo on channel 0, press Ctrl-C to quit...')
     while True:
-        # Move servo on channel O between extremes.
-        #    pwm.set_pwm(0, 0, servo_min)
-        #    print("min")
-        #    time.sleep(1)
-        #    pwm.set_pwm(1, 0, servo_min)
-        #    time.sleep(1)
-        #    pwm.set_pwm(1, 0, servo_max)
-        #    time.sleep(1)
-        #    pwm.set_pwm(0, 0, servo_max)
-        #    time.sleep(1)
-        #    distance = readPing();
-        #    Serial.println(distance);
         if 1:
             ch = "f"
             if ch == 'f':
