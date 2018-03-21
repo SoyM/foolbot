@@ -1,10 +1,10 @@
 from __future__ import division
 import time
 import logging
-import paho.mqtt.client as mqtt
 import pca9685
 import motion
 import threading
+from mqttController import MqttController
 
 
 class Servo:
@@ -67,9 +67,6 @@ rear_left_leg = Servo(5)
 rear_right_body = Servo(6)
 rear_right_leg = Servo(7)
 
-HOST = "m13.cloudmqtt.com"
-PORT = 15873
-
 
 def setup():
     front_right_body.attach(6)
@@ -90,30 +87,9 @@ def setup():
     rear_right_leg.write(90)
 
 
-def client_loop():
-    client_id = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
-    client = mqtt.Client(client_id)
-    client.username_pw_set("lytlmnde", "3mtD81MmaVqW")
-    client.on_connect = on_connect
-    client.on_message = on_message
-    client.connect(HOST, PORT)
-    client.loop_forever()
-
-
-def on_connect(client, userdata, flags, rc):
-    print("Connected with result code " + str(rc))
-    client.subscribe("test")
-    client.subscribe("admin")
-    client.subscribe("servoAin")
-
-
-def on_message(client, userdata, msg):
-    print(msg.topic + " " + msg.payload.decode("utf-8"))
-
-
 if __name__ == '__main__':
     setup()
-    t1 = threading.Thread(target=client_loop)
+    t1 = threading.Thread(target=MqttController.client_loop)
     t1.setDaemon(True)
     t1.start()
     logging.basicConfig(level=logging.DEBUG)
