@@ -1,7 +1,7 @@
 import time
 
-wait = 150 / 1000
-wait2 = 250 / 1000
+wait = 0.15
+wait2 = 0.25
 
 
 class Motion:
