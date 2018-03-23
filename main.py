@@ -26,9 +26,6 @@ class Servo:
         self.pwm.set_pwm(self.channel, 0, angle)
         print(self.angle)
 
-    def attach(self, channel):
-        self.channel = channel
-
     def set_servo_angle(self, channel, angle):
         pulse = angle * 5
         pulse //= 2 + 150
@@ -69,21 +66,13 @@ rear_right_leg = Servo(7)
 
 
 def setup():
-    front_right_body.attach(6)
     front_right_body.write(40)
-    front_right_leg.attach(7)
     front_right_leg.write(90)
-    front_left_body.attach(8)
     front_left_body.write(120)
-    front_left_leg.attach(9)
     front_left_leg.write(90)
-    rear_left_body.attach(10)
     rear_left_body.write(40)
-    rear_left_leg.attach(11)
     rear_left_leg.write(90)
-    rear_right_body.attach(4)
     rear_right_body.write(120)
-    rear_right_leg.attach(5)
     rear_right_leg.write(90)
 
 
