@@ -1,7 +1,7 @@
 import time
 
-wait = 0.15
-wait2 = 0.25
+wait = 0.5
+wait2 = 0.5
 
 
 class Motion:

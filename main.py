@@ -25,24 +25,27 @@ class Servo:
     def write(self, angle):
         self.angle = angle
         self.set_servo_angle(self.channel, self.angle)
-        print("channel={0},angle={1}", format(self.channel, self.angle))
+        #print("channel:{0},angle:{1}".format(self.channel, self.angle))
 
     def set_servo_angle(self, channel, angle):
         pulse = angle * 5
         pulse //= 2
         pulse += 150
         self.pwm.set_pwm(channel, 0, pulse)
+        print(pulse)
 
     def move_extreme(self):
         # Move servo on channel O between extremes.
-        self.pwm.set_pwm(0, 0, self.servo_min)
+        #self.pwm.set_pwm(0, 0, self.servo_min)
+        self.write(10)
         print("min")
         time.sleep(1)
-        self.pwm.set_pwm(1, 0, self.servo_min)
+##        self.pwm.set_pwm(1, 0, self.servo_min)
         time.sleep(1)
-        self.pwm.set_pwm(1, 0, self.servo_max)
+##        self.pwm.set_pwm(1, 0, self.servo_max)
         time.sleep(1)
-        self.pwm.set_pwm(0, 0, self.servo_max)
+##        self.pwm.set_pwm(0, 0, self.servo_max)
+        self.write(170)
         time.sleep(1)
 
     # Helper function to make setting a servo pulse width simpler.
@@ -90,6 +93,7 @@ if __name__ == '__main__':
     autoMove = 1
 
     print('Moving servo on channel 0, press Ctrl-C to quit...')
+    
     while True:
         if 1:
             ch = "f"
