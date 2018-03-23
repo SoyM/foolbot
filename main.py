@@ -23,12 +23,14 @@ class Servo:
         self.servo_max = 600  # Max pulse length out of 4096
 
     def write(self, angle):
-        self.set_servo_angle(self.channel, angle)
-        print(angle)
+        self.angle = angle
+        self.set_servo_angle(self.channel, self.angle)
+        print("channel={0},angle={1}", format(self.channel, self.angle))
 
     def set_servo_angle(self, channel, angle):
         pulse = angle * 5
-        pulse //= 2 + 150
+        pulse //= 2
+        pulse += 150
         self.pwm.set_pwm(channel, 0, pulse)
 
     def move_extreme(self):
