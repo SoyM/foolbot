@@ -96,7 +96,6 @@ if __name__ == '__main__':
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,
                        rear_right_body, rear_right_leg)
-
     autoMove = 1
 
     print('Moving servo on channel 0, press Ctrl-C to quit...')
@@ -124,8 +123,7 @@ if __name__ == '__main__':
             # Pressing a once causes the robot to begin moving autonomously,
             #  and pressing it again causes the robot to stop
             if ch == 'a':
-                if ~autoMove:
-                    waveCount2 = 0
+                if autoMove == 0:
                     autoMove = 1
             else:
                 autoMove = 0
