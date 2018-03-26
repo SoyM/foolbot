@@ -107,6 +107,7 @@ if __name__ == '__main__':
 
     while True:
         if 1:
+            ch = "auto"
             if ch == 'up':
                 mo.forward()
             if ch == 'down':
@@ -115,19 +116,19 @@ if __name__ == '__main__':
                 mo.right()
             if ch == 'left':
                 mo.left()
-            if ch == 'w':
+            if ch == 'wave':
                 mo.wave()
                 mo.stand()
                 mo.wave2()
                 mo.stand()
-            if ch == 's':
+            if ch == 'sleep':
                 mo.sleep()
-            if ch == 'u':
+            if ch == 'stand':
                 mo.stand()
 
             # Pressing a once causes the robot to begin moving autonomously,
             #  and pressing it again causes the robot to stop
-            if ch == 'a':
+            if ch == 'auto':
                 if autoMove == 0:
                     autoMove = 1
             else:
