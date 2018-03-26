@@ -86,8 +86,7 @@ def get_set_mode():
     while True:
         r = requests.get('http://111.230.224.190/get_set_motion/')
         global ch
-        
-        ch = r.json()
+        ch = r.json()['set_mode']
         payload = {'bot_mode': ch}
         r = requests.post('http://111.230.224.190/update_bot_motion/', json=payload)
         print(r.text)
