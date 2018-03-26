@@ -84,9 +84,10 @@ def setup():
 
 def get_set_mode():
     while True:
-        r = requests.get('http://111.230.224.190/get_set_status/')
+        r = requests.get('http://111.230.224.190/get_set_motion/')
         global ch
-        ch = r.json()['set_mode']
+        
+        ch = r.json()
         payload = {'bot_mode': ch}
         r = requests.post('http://111.230.224.190/update_bot_motion/', json=payload)
         print(r.text)
@@ -103,11 +104,12 @@ if __name__ == '__main__':
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,
                        rear_right_body, rear_right_leg)
-    autoMove = 1
+    autoMove = 0
 
     print('Moving servo on channel 0, press Ctrl-C to quit...')
 
     while True:
+        ch = ''
         if ch:
             if ch == 'up':
                 mo.forward()
