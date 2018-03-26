@@ -108,7 +108,7 @@ if __name__ == '__main__':
     print('Moving servo on channel 0, press Ctrl-C to quit...')
 
     while True:
-        ch = ''
+        ch = 'auto'
         if ch:
             if ch == 'up':
                 mo.forward()
