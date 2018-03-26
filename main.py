@@ -108,8 +108,7 @@ if __name__ == '__main__':
     print('Moving servo on channel 0, press Ctrl-C to quit...')
 
     while True:
-        if 1:
-            ch = "auto"
+        if ch:
             if ch == 'up':
                 mo.forward()
             if ch == 'down':
@@ -135,6 +134,8 @@ if __name__ == '__main__':
                     autoMove = 1
             else:
                 autoMove = 0
+        else:
+            time.sleep(1)
 
         if autoMove:
             mo.autonomy()
