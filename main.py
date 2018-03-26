@@ -83,12 +83,13 @@ def setup():
 
 
 def get_set_mode():
-    r = requests.get('https://http://111.230.224.190/get_set_status/')
+    r = requests.get('http://111.230.224.190/get_set_status/')
     global ch
     ch = r.json()['set_mode']
     payload = {'bot_mode': ch}
-    r = requests.post('https://http://111.230.224.190/update_bot_motion/', json=payload)
+    r = requests.post('http://111.230.224.190/update_bot_motion/', json=payload)
     print(r.text)
+    time.sleep(1)
 
 
 if __name__ == '__main__':
