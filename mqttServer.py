@@ -8,4 +8,3 @@ t1.start()
 
 while 1:
     mq.send_message(input())
-

@@ -5,6 +5,7 @@ import pca9685
 import motion
 import threading
 from mqttController import MqttController
+import requests
 
 
 class Servo:
@@ -25,7 +26,7 @@ class Servo:
     def write(self, angle):
         self.angle = angle
         self.set_servo_angle(self.channel, self.angle)
-        #print("channel:{0},angle:{1}".format(self.channel, self.angle))
+        # print("channel:{0},angle:{1}".format(self.channel, self.angle))
 
     def set_servo_angle(self, channel, angle):
         pulse = angle * 5
@@ -36,15 +37,15 @@ class Servo:
 
     def move_extreme(self):
         # Move servo on channel O between extremes.
-        #self.pwm.set_pwm(0, 0, self.servo_min)
+        # self.pwm.set_pwm(0, 0, self.servo_min)
         self.write(10)
         print("min")
         time.sleep(1)
-##        self.pwm.set_pwm(1, 0, self.servo_min)
+        ##        self.pwm.set_pwm(1, 0, self.servo_min)
         time.sleep(1)
-##        self.pwm.set_pwm(1, 0, self.servo_max)
+        ##        self.pwm.set_pwm(1, 0, self.servo_max)
         time.sleep(1)
-##        self.pwm.set_pwm(0, 0, self.servo_max)
+        ##        self.pwm.set_pwm(0, 0, self.servo_max)
         self.write(170)
         time.sleep(1)
 
@@ -81,9 +82,19 @@ def setup():
     rear_right_leg.write(90)
 
 
+def get_set_mode():
+    r = requests.get('https://http://111.230.224.190/get_set_status/')
+    global ch
+    ch = r.json()['set_mode']
+    payload = {'bot_mode': ch}
+    r = requests.post('https://http://111.230.224.190/update_bot_motion/', json=payload)
+    print(r.text)
+
+
 if __name__ == '__main__':
     setup()
-    t1 = threading.Thread(target=MqttController.client_loop)
+    # t1 = threading.Thread(target=MqttController.client_loop)
+    t1 = threading.Thread(target=get_set_mode)
     t1.setDaemon(True)
     t1.start()
     logging.basicConfig(level=logging.DEBUG)
@@ -93,17 +104,16 @@ if __name__ == '__main__':
     autoMove = 1
 
     print('Moving servo on channel 0, press Ctrl-C to quit...')
-    
+
     while True:
         if 1:
-            ch = "f"
-            if ch == 'f':
+            if ch == 'up':
                 mo.forward()
-            if ch == 'b':
+            if ch == 'down':
                 mo.back()
-            if ch == 'r':
+            if ch == 'right':
                 mo.right()
-            if ch == 'l':
+            if ch == 'left':
                 mo.left()
             if ch == 'w':
                 mo.wave()
