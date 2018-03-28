@@ -6,6 +6,8 @@ import motion
 import threading
 from mqttController import MqttController
 import requests
+import json
+import middleCh
 
 
 class Servo:
@@ -95,10 +97,13 @@ def get_set_mode():
 
 if __name__ == '__main__':
     setup()
-    # t1 = threading.Thread(target=MqttController.client_loop)
-    t1 = threading.Thread(target=get_set_mode)
+    mqtt = MqttController()
+    t1 = threading.Thread(target=mqtt.client_loop)
     t1.setDaemon(True)
     t1.start()
+    t2 = threading.Thread(target=get_set_mode)
+    t2.setDaemon(True)
+    t2.start()
     logging.basicConfig(level=logging.DEBUG)
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,
@@ -108,7 +113,8 @@ if __name__ == '__main__':
     print('Moving servo on channel 0, press Ctrl-C to quit...')
 
     while True:
-        ch = 'auto'
+        ch = middleCh.get_value("bot_mode")
+        mqtt.client.publish("bot_mode", json.dumps({"bot_mode": ch}))
         if ch:
             if ch == 'up':
                 mo.forward()

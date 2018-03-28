@@ -1,6 +1,7 @@
 import time
 import paho.mqtt.client as mqtt
 import json
+import middleCh
 
 HOST = "m13.cloudmqtt.com"
 PORT = 15873
@@ -25,10 +26,15 @@ class MqttController:
         client.subscribe("test")
         client.subscribe("admin")
         client.subscribe("servoAin")
+        client.subscribe("set_mode")
         client.publish("test", json.dumps({"user": USER, "say": "Hello,anyone!"}))
 
     def on_message(self, client, userdata, msg):
         print(msg.topic + " " + msg.payload.decode("utf-8"))
+        if msg.topic == "set_mode":
+            ch = json.loads(msg.payload.decode("utf-8"))['set_mode']
+            middleCh.set_value("bot_mode", ch)
+            print(ch)
 
-    def send_message(self, message):
-        self.client.publish("test", json.dumps({"user": USER, "say": message}))
+    def send_message(self, topic, message):
+        self.client.publish(topic, json.dumps(message))
