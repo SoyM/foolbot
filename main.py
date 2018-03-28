@@ -5,7 +5,6 @@ import pca9685
 import motion
 import threading
 from mqttController import MqttController
-import requests
 import json
 import middleCh
 
@@ -84,26 +83,13 @@ def setup():
     rear_right_leg.write(90)
 
 
-def get_set_mode():
-    while True:
-        r = requests.get('http://111.230.224.190/get_set_motion/')
-        global ch
-        ch = r.json()['set_mode']
-        payload = {'bot_mode': ch}
-        r = requests.post('http://111.230.224.190/update_bot_motion/', json=payload)
-        print(r.text)
-        time.sleep(1)
-
-
 if __name__ == '__main__':
     setup()
     mqtt = MqttController()
     t1 = threading.Thread(target=mqtt.client_loop)
     t1.setDaemon(True)
     t1.start()
-    t2 = threading.Thread(target=get_set_mode)
-    t2.setDaemon(True)
-    t2.start()
+
     logging.basicConfig(level=logging.DEBUG)
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,

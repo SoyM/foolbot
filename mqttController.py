@@ -16,12 +16,13 @@ class MqttController:
 
     def client_loop(self):
         self.client.username_pw_set(USER, PASSWORD)
-        self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
+        self.client.on_connect = self.__on_connect
+        self.client.on_message = self.__on_message
         self.client.connect(HOST, PORT)
         self.client.loop_forever()
 
-    def on_connect(self, client, userdata, flags, rc):
+    @classmethod
+    def __on_connect(self, client, userdata, flags, rc):
         print("Connected with result code " + str(rc))
         client.subscribe("test")
         client.subscribe("admin")
@@ -29,7 +30,8 @@ class MqttController:
         client.subscribe("set_mode")
         client.publish("test", json.dumps({"user": USER, "say": "Hello,anyone!"}))
 
-    def on_message(self, client, userdata, msg):
+    @classmethod
+    def __on_message(self, client, userdata, msg):
         print(msg.topic + " " + msg.payload.decode("utf-8"))
         if msg.topic == "set_mode":
             ch = json.loads(msg.payload.decode("utf-8"))['set_mode']
