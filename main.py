@@ -100,7 +100,10 @@ if __name__ == '__main__':
 
     while True:
         ch = middleCh.get_value("bot_mode")
-        mqtt.client.publish("bot_mode", json.dumps({"bot_mode": ch}))
+        mqtt.client.publish("bot_mode", json.dumps({
+            "bot_mode": ch,
+            "update_date": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        }))
         if ch:
             if ch == 'up':
                 mo.forward()
@@ -128,7 +131,7 @@ if __name__ == '__main__':
             else:
                 autoMove = 0
         else:
-            time.sleep(1)
+            time.sleep(0.5)
 
         if autoMove:
             mo.autonomy()
