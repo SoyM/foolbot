@@ -90,6 +90,8 @@ if __name__ == '__main__':
     t1.setDaemon(True)
     t1.start()
 
+    middleCh._init()
+
     logging.basicConfig(level=logging.DEBUG)
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,
