@@ -40,16 +40,21 @@ if __name__ == '__main__':
 
     middleCh._init()
 
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                        datefmt='%m-%d %H:%M',
+                        filename='pi.log',
+                        filemode='aw')
+    console = logging.StreamHandler()
     logger = logging.getLogger(__name__)
-    logger.addHandler(logging.FileHandler("log.txt"))
+    logger.addHandler(console)
 
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,
                        rear_right_body, rear_right_leg)
     autoMove = 0
 
-    print('Init success, press Ctrl-C to quit...')
+    logging.info('Init success, press Ctrl-C to quit...')
 
     while True:
         ch = middleCh.get_value("bot_mode")
