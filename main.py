@@ -41,6 +41,9 @@ if __name__ == '__main__':
     middleCh._init()
 
     logging.basicConfig(level=logging.DEBUG)
+    logger = logging.getLogger(__name__)
+    logger.addHandler(logging.FileHandler("log.txt"))
+
     mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                        rear_left_leg,
                        rear_right_body, rear_right_leg)

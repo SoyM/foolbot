@@ -1,3 +1,7 @@
+import pca9685
+import time
+
+
 class Servo:
     def __init__(self, channel):
         self.channel = channel

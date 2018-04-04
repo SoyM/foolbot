@@ -23,4 +23,6 @@ python main.py
     * mqttController.py mqtt即时通讯协议库
 
 ## 资料
+[PCA9685 datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
+
 ![RaspberryPi-GPIO](doc/Pi-GPIO-pins.png)
