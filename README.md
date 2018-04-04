@@ -2,7 +2,7 @@
 傻瓜机器龟-树莓派控制代码
 
 ## 用法
-将舵机控制板pca9685与树莓派GPIO口连接,使用SDA1,SCL1
+将舵机控制板pca9685与树莓派GPIO口（SDA1,SCL1）连接
 
 命令行运行
 ``` 
@@ -13,7 +13,8 @@ python main.py
 * main.py 主文件
 
 * 控制模块
-    * motion.py 机器动作控制
+    * servo.py 舵机控制类
+    * motion.py 机器动作控制类
     * pca9685.py 16路舵机控制板pca9685
     * I2C.py I2c(Inter－Integrated Circuit)库
     * smbus.py SMBus(System Management Bus,系统管理总线)库
