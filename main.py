@@ -28,7 +28,7 @@ rear_right_body.write(120)
 rear_right_leg.write(90)
 
 logger = comm_log.get_logging(__name__)
-middleCh._init()
+middleCh.init()
 mqtt = MqttController()
 mo = motion.Motion(front_right_body, front_right_leg, front_left_body, front_left_leg, rear_left_body,
                    rear_left_leg,

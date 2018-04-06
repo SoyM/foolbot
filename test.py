@@ -20,7 +20,7 @@ t1 = threading.Thread(target=mqtt.client_loop)
 t1.setDaemon(True)
 t1.start()
 
-middleCh._init()
+middleCh.init()
 
 while True:
     ch = middleCh.get_value("bot_mode")
@@ -28,4 +28,4 @@ while True:
         "bot_mode": ch,
         "update_date": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     }))
-    time.sleep(1)
+    time.sleep(0.7)
