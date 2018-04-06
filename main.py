@@ -5,8 +5,8 @@ import threading
 
 from mqttController import MqttController
 import middleCh
-import motion
-from servo import Servo
+from actions import motion
+from actions.servo import Servo
 import comm_log
 
 front_right_body = Servo(0)

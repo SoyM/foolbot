@@ -1,5 +1,6 @@
-import pca9685
 import time
+
+from actions import pca9685
 
 
 class Servo:

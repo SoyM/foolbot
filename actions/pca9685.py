@@ -45,7 +45,7 @@ class PCA9685(object):
         """Initialize the PCA9685."""
         # Setup I2C interface for the device.
         if i2c is None:
-            import I2C
+            from actions import I2C
             i2c = I2C
         self._device = i2c.get_i2c_device(address, **kwargs)
         self.set_all_pwm(0, 0)
