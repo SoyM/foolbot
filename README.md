@@ -22,7 +22,13 @@ python main.py
 * 数据传输模块
     * mqttController.py mqtt即时通讯协议库
 
+* 视觉模块
+    * ./vision
+
+* 日志记录 comm_log.py
+
 ## 资料
 [PCA9685 datasheet](https://cdn-shop.adafruit.com/datasheets/PCA9685.pdf)
 
+RaspberryPi-GPIO
 ![RaspberryPi-GPIO](doc/Pi-GPIO-pins.png)
