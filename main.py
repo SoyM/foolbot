@@ -3,7 +3,7 @@ import time
 import json
 import threading
 
-from mqttController import MqttController
+from communications.mqttController import MqttController
 import middleCh
 from actions import motion
 from actions.servo import Servo

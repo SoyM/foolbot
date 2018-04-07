@@ -1,4 +1,4 @@
-from mqttController import MqttController
+from communications.mqttController import MqttController
 import threading
 
 mq = MqttController()
