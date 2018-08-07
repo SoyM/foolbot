@@ -11,8 +11,8 @@ pip install -r requirements.txt
 
 * 将舵机控制板pca9685与树莓派GPIO口（SDA1,SCL1）连接
 
-*命令行运行
-```
+* 命令行运行
+```bash
 python main.py
 ```
 
