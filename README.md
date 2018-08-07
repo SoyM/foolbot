@@ -1,15 +1,23 @@
 # fool bot
+
 傻瓜机器龟-树莓派控制代码
 
 ## 用法
-将舵机控制板pca9685与树莓派GPIO口（SDA1,SCL1）连接
 
-命令行运行
-``` 
+* 安装依赖库
+```bash
+pip install -r requirements.txt
+```
+
+* 将舵机控制板pca9685与树莓派GPIO口（SDA1,SCL1）连接
+
+*命令行运行
+```
 python main.py
-``` 
+```
 
 ## 文件功能描述
+
 * main.py 主文件
 
 * actions 控制模块
